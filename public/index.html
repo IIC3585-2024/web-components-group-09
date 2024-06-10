@@ -11,7 +11,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
             integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
             crossorigin="anonymous"></script>
-    <script src="./script.js"></script>
+    <script type="module" src="./script.js" defer></script>
+    <script src="./template.js" defer></script>
 </head>
 <body>
 <main>
@@ -34,10 +35,96 @@
         </div>
 
         <div class="col-12">
-            <h3>
-                Aqui va el todo list...
 
-            </h3>
+            <template id="todo-list-template">
+                <div class="todo-list">
+                    <h3 class="todo-list-title"></h3>
+                    <ul class="todo-list-items">
+                    </ul>
+                    <input type="text" class="todo-list-input" placeholder="Add new task">
+                    <button type="submit" class="todo-list-add">Add</button>
+                </div>
+
+                <style >
+                    .todo-list {
+                        border: 1px solid #ccc;
+                        border-radius: 5px;
+                        padding: 10px;
+                        margin: 10px 0;
+                    }
+
+                    .todo-list-title {
+                        margin: 0;
+                        padding: 0;
+                    }
+
+                    .todo-list-items {
+                        list-style: none;
+                        padding: 0;
+                    }
+
+                    .todo-list-item {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        padding: 5px 0;
+                    }
+
+                    .todo-list-item input {
+                        margin-right: 10px;
+                    }
+
+                    .todo-list-form {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-top: 10px;
+                    }
+
+                    .todo-list-input {
+                        flex: 1;
+                        padding: 5px;
+                        margin-right: 10px;
+                    }
+
+                    .todo-list-add {
+                        padding: 5px 10px;
+                        background-color: #007bff;
+                        color: #fff;
+                        border: none;
+                        border-radius: 5px;
+                        cursor: pointer;
+                    }
+
+                    .todo-list-add:hover {
+                        background-color: #0056b3;
+                    }
+                </style>
+            </template>
+
+            <div>
+                <todo-list
+                    item1="Learn Web Components"
+                    item2="Build a Web Component"
+                    item3="Use Web Components in a project"
+                    prompt="Add new list item"
+                    title="TODO with template and shadow DOM"
+                >
+                </todo-list>
+            </div>
+
+            <div>
+                <todo-list-lit
+                    item1="Learn Web Components"
+                    item2="Build a Web Component"
+                    item3="Use Web Components in a project"
+                    prompt="Add new list item"
+                    title="TODO with lit-html and LitElement"
+                >
+                </todo-list-lit>
+            </div>
+
+
         </div>
     </div>
 
