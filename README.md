@@ -20,6 +20,7 @@ To install and run this project, follow these steps:
 1. Clone the repository: `git clone https://github.com/IIC3585-2024/web-components-group-09`
 2. Navigate to the project directory: `cd web-components-group-09`
 3. Install the dependencies: `npm install`
+4. Run json-server `npx json-server db.json`
 4. Open index.html in your browser
 
 ## Contributing
