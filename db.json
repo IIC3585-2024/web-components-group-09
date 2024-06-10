@@ -1,0 +1,84 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Perfume Giorgio Armani Acqua Di Gio Absolu Hombre EDP 200 ml",
+      "price": 79990,
+      "original_price": 175990,
+      "discount": -55,
+      "rating": 4.5
+    },
+    {
+      "id": 2,
+      "name": "Perfume Chanel Bleu de Chanel Homme EDP 150 ml",
+      "price": 89990,
+      "original_price": 199990,
+      "discount": -55,
+      "rating": 4.7
+    },
+    {
+      "id": 3,
+      "name": "Perfume Dior Sauvage Homme EDP 100 ml",
+      "price": 99990,
+      "original_price": 219990,
+      "discount": -54,
+      "rating": 4.8
+    },
+    {
+      "id": 4,
+      "name": "Perfume Paco Rabanne 1 Million Homme EDT 200 ml",
+      "price": 74990,
+      "original_price": 159990,
+      "discount": -53,
+      "rating": 4.4
+    },
+    {
+      "id": 5,
+      "name": "Perfume Calvin Klein Euphoria Men EDT 100 ml",
+      "price": 59990,
+      "original_price": 139990,
+      "discount": -57,
+      "rating": 4.3
+    },
+    {
+      "id": 6,
+      "name": "Perfume Hugo Boss Bottled Homme EDT 200 ml",
+      "price": 64990,
+      "original_price": 149990,
+      "discount": -57,
+      "rating": 4.6
+    },
+    {
+      "id": 7,
+      "name": "Perfume Versace Eros Homme EDT 200 ml",
+      "price": 79990,
+      "original_price": 169990,
+      "discount": -53,
+      "rating": 4.5
+    },
+    {
+      "id": 8,
+      "name": "Perfume Yves Saint Laurent Y Homme EDP 100 ml",
+      "price": 94990,
+      "original_price": 199990,
+      "discount": -52,
+      "rating": 4.7
+    },
+    {
+      "id": 9,
+      "name": "Perfume Montblanc Explorer Homme EDP 100 ml",
+      "price": 64990,
+      "original_price": 139990,
+      "discount": -54,
+      "rating": 4.4
+    },
+    {
+      "id": 10,
+      "name": "Perfume Givenchy Gentleman Homme EDP 100 ml",
+      "price": 84990,
+      "original_price": 179990,
+      "discount": -53,
+      "rating": 4.5
+    }
+  ]
+}
