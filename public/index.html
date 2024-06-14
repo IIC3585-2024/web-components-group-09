@@ -8,32 +8,45 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
             integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
             crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-            integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-            crossorigin="anonymous"></script>
     <script type="module" src="./script.js" defer></script>
     <script src="./template.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
 </head>
-<body>
-<main>
-    <div class="row">
-        <div class="col-12">
-            <h1>Web Components</h1>
+<body class="container-sm">
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand p-lg-2" href="#">Web Components</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#Productos">Productos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#TODO_List">TODO List</a>
+                </li>
+            </ul>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <h3>
-                List of Products
+    </nav>
 
-            </h3>
-        </div>
+</header>
+<main>
+    <div class="row" id="products-section">
         <div class="col-12">
             <div class="products-container" id="products-container">
                 <!-- Products will be loaded here -->
             </div>
         </div>
+    </div>
 
+    <div class="row" id="todo-list-section">
         <div class="col-12">
 
             <template id="todo-list-template">
@@ -45,29 +58,39 @@
                     <button type="submit" class="todo-list-add">Add</button>
                 </div>
 
-                <style >
+                <style>
                     .todo-list {
+                        font-family: 'Roboto', sans-serif; /* Cambia la tipografía */
                         border: 1px solid #ccc;
                         border-radius: 5px;
-                        padding: 10px;
-                        margin: 10px 0;
+                        padding: 20px; /* Aumenta el espaciado */
+                        margin: 20px 0;
+                        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); /* Añade sombras */
                     }
 
                     .todo-list-title {
                         margin: 0;
                         padding: 0;
+                        font-size: 24px; /* Aumenta el tamaño de la fuente */
+                        color: #333; /* Cambia el color del texto */
                     }
 
                     .todo-list-items {
                         list-style: none;
                         padding: 0;
+                        margin-top: 20px; /* Añade espacio encima de la lista de tareas */
                     }
 
                     .todo-list-item {
                         display: flex;
                         justify-content: space-between;
                         align-items: center;
-                        padding: 5px 0;
+                        padding: 10px 0; /* Aumenta el espaciado */
+                        border-bottom: 1px solid #ccc; /* Añade una línea divisoria */
+                    }
+
+                    .todo-list-item:last-child {
+                        border-bottom: none; /* Elimina la línea divisoria del último elemento */
                     }
 
                     .todo-list-item input {
@@ -78,60 +101,79 @@
                         display: flex;
                         justify-content: space-between;
                         align-items: center;
-                        margin-top: 10px;
+                        margin-top: 20px; /* Aumenta el espaciado */
                     }
 
                     .todo-list-input {
                         flex: 1;
-                        padding: 5px;
+                        padding: 10px; /* Aumenta el espaciado */
                         margin-right: 10px;
+                        border-radius: 5px; /* Añade bordes redondeados */
+                        border: 1px solid #ccc; /* Añade un borde */
                     }
 
                     .todo-list-add {
-                        padding: 5px 10px;
+                        padding: 10px 20px; /* Aumenta el espaciado */
                         background-color: #007bff;
                         color: #fff;
                         border: none;
                         border-radius: 5px;
                         cursor: pointer;
+                        transition: background-color 0.3s ease; /* Añade una transición */
                     }
 
                     .todo-list-add:hover {
                         background-color: #0056b3;
+                    }
+
+                    .todo-item-delete {
+                        padding: 5px 10px; /* Aumenta el espaciado */
+                        background-color: #dc3545; /* Cambia el color de fondo */
+                        color: #fff; /* Cambia el color del texto */
+                        border: none;
+                        border-radius: 5px; /* Añade bordes redondeados */
+                        cursor: pointer;
+                        transition: background-color 0.3s ease; /* Añade una transición */
+                    }
+
+                    .todo-item-delete:hover {
+                        background-color: #c82333; /* Cambia el color de fondo cuando se pasa el ratón por encima */
                     }
                 </style>
             </template>
 
             <div>
                 <todo-list
-                    item1="Learn Web Components"
-                    item2="Build a Web Component"
-                    item3="Use Web Components in a project"
-                    prompt="Add new list item"
-                    title="TODO with template and shadow DOM"
+                        item1="Learn Web Components"
+                        item2="Build a Web Component"
+                        item3="Use Web Components in a project"
+                        prompt="Add new list item"
+                        title="TODO with template and shadow DOM"
                 >
                 </todo-list>
             </div>
 
             <div>
                 <todo-list-lit
-                    item1="Learn Web Components"
-                    item2="Build a Web Component"
-                    item3="Use Web Components in a project"
-                    prompt="Add new list item"
-                    title="TODO with lit-html and LitElement"
+                        item1="Learn Web Components"
+                        item2="Build a Web Component"
+                        item3="Use Web Components in a project"
+                        prompt="Add new list item"
+                        title="TODO with lit-html and LitElement"
                 >
                 </todo-list-lit>
             </div>
 
-
         </div>
     </div>
-
 </main>
 
 <footer>
-    <!-- Footer content goes here -->
+    <footer class="footer mt-auto py-3 bg-dark">
+        <div class="container-sm">
+            <span class="text-white">© 2024 Jose Cáceres, Ricardo Urvina, Sofía Villalobos..</span>
+        </div>
+    </footer>
 </footer>
 </body>
 </html>
