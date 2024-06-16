@@ -23,70 +23,94 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <h3>
-                List of Products
-
-            </h3>
+            <h3>List of Products</h3>
         </div>
         <div class="col-12">
             <div class="products-container" id="products-container">
                 <!-- Products will be loaded here -->
             </div>
         </div>
-
         <div class="col-12">
+            <template id="product-template">
+                <style>
+                    .product-card {
+                        border: 1px solid #ccc;
+                        border-radius: 5px;
+                        padding: 10px;
+                        margin: 10px;
+                        text-align: center;
+                    }
+                    .product-image {
+                        max-width: 100%;
+                        height: auto;
+                    }
+                    .product-name {
+                        font-size: 1.2em;
+                        margin: 10px 0;
+                    }
+                    .product-price,
+                    .product-original-price,
+                    .product-discount,
+                    .product-rating {
+                        margin: 5px 0;
+                    }
+                    .product-original-price {
+                        text-decoration: line-through;
+                        color: red;
+                    }
+                </style>
+                <div class="product-card">
+                    <img class="product-image" src="" alt="Product Image">
+                    <div class="product-name"></div>
+                    <div class="product-price"></div>
+                    <div class="product-original-price"></div>
+                    <div class="product-discount"></div>
+                    <div class="product-rating"></div>
+                </div>
+            </template>
 
             <template id="todo-list-template">
                 <div class="todo-list">
                     <h3 class="todo-list-title"></h3>
-                    <ul class="todo-list-items">
-                    </ul>
+                    <ul class="todo-list-items"></ul>
                     <input type="text" class="todo-list-input" placeholder="Add new task">
                     <button type="submit" class="todo-list-add">Add</button>
                 </div>
-
-                <style >
+                <style>
                     .todo-list {
                         border: 1px solid #ccc;
                         border-radius: 5px;
                         padding: 10px;
                         margin: 10px 0;
                     }
-
                     .todo-list-title {
                         margin: 0;
                         padding: 0;
                     }
-
                     .todo-list-items {
                         list-style: none;
                         padding: 0;
                     }
-
                     .todo-list-item {
                         display: flex;
                         justify-content: space-between;
                         align-items: center;
                         padding: 5px 0;
                     }
-
                     .todo-list-item input {
                         margin-right: 10px;
                     }
-
                     .todo-list-form {
                         display: flex;
                         justify-content: space-between;
                         align-items: center;
                         margin-top: 10px;
                     }
-
                     .todo-list-input {
                         flex: 1;
                         padding: 5px;
                         margin-right: 10px;
                     }
-
                     .todo-list-add {
                         padding: 5px 10px;
                         background-color: #007bff;
@@ -95,7 +119,6 @@
                         border-radius: 5px;
                         cursor: pointer;
                     }
-
                     .todo-list-add:hover {
                         background-color: #0056b3;
                     }
@@ -123,11 +146,8 @@
                 >
                 </todo-list-lit>
             </div>
-
-
         </div>
     </div>
-
 </main>
 
 <footer>

@@ -1,5 +1,6 @@
 import { html, css, LitElement } from "../node_modules/lit";
 
+/*
 document.addEventListener("DOMContentLoaded", function () {
   console.log("DOM fully loaded and parsed");
   fetch("http://localhost:3000/products")
@@ -49,6 +50,46 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     .catch((error) => console.error("Error fetching the products:", error));
 });
+*/
+document.addEventListener("DOMContentLoaded", function () {
+  console.log("DOM fully loaded and parsed");
+  fetch("http://localhost:3000/products")
+    .then((response) => response.json())
+    .then((products) => {
+      const container = document.getElementById("products-container");
+      products.forEach((product) => {
+        const productElement = document.createElement("product-card");
+        productElement.setAttribute("name", product.name);
+        productElement.setAttribute("price", (product.price / 1000).toFixed(3));
+        productElement.setAttribute("original-price", (product.original_price / 1000).toFixed(3));
+        productElement.setAttribute("discount", product.discount);
+        productElement.setAttribute("rating", product.rating);
+        container.appendChild(productElement);
+      });
+    })
+    .catch((error) => console.error("Error fetching the products:", error));
+});
+
+class ProductCard extends HTMLElement {
+  constructor() {
+    super();
+    const template = document.getElementById('product-template').content;
+    const shadowRoot = this.attachShadow({ mode: 'open' });
+    shadowRoot.appendChild(template.cloneNode(true));
+  }
+
+  connectedCallback() {
+    this.shadowRoot.querySelector('.product-image').src = "https://via.placeholder.com/200x300";
+    this.shadowRoot.querySelector('.product-name').textContent = this.getAttribute('name');
+    this.shadowRoot.querySelector('.product-price').textContent = `$${this.getAttribute('price')}`;
+    this.shadowRoot.querySelector('.product-original-price').textContent = `Normal: $${this.getAttribute('original-price')}`;
+    this.shadowRoot.querySelector('.product-discount').textContent = `${this.getAttribute('discount')}%`;
+    this.shadowRoot.querySelector('.product-rating').textContent = `★ ${this.getAttribute('rating')}`;
+  }
+}
+
+customElements.define('product-card', ProductCard);
+
 
 class TodoListLit extends LitElement {
   static styles = css`
