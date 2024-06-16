@@ -14,64 +14,107 @@ document.addEventListener("DOMContentLoaded", function () {
     todoListSection.style.display = 'none';
   }
 
-  // Función para mostrar la sección de TODO List y ocultar la de productos
   function showTodoList() {
     productsSection.style.display = 'none';
     todoListSection.style.display = 'block';
   }
 
-  // Agrega los controladores de eventos click a los enlaces del navbar
   productsLink.addEventListener('click', showProducts);
   todoListLink.addEventListener('click', showTodoList);
 
-  // Muestra la sección de productos por defecto
   showProducts();
-  fetch("http://localhost:3000/products")
-    .then((response) => response.json())
-    .then((products) => {
-      const container = document.getElementById("products-container");
-      products.forEach((product) => {
-        const productCard = document.createElement("div");
-        productCard.className = "product-card";
 
-        const productImage = document.createElement("img");
-        productImage.src = "https://via.placeholder.com/200x300";
-        productImage.alt = "Perfume";
-        productImage.className = "product-image";
+  const productsContainer = document.getElementById('products-container');
 
-        const productName = document.createElement("div");
-        productName.className = "product-name";
-        productName.textContent = product.name;
+  class ProductCard extends HTMLElement {
+    constructor() {
+      super();
 
-        const productPrice = document.createElement("div");
-        productPrice.className = "product-price";
-        productPrice.textContent = `$${(product.price / 1000).toFixed(3)}`;
+      this.attachShadow({ mode: 'open' });
 
-        const productOriginalPrice = document.createElement("div");
-        productOriginalPrice.className = "product-original-price";
-        productOriginalPrice.textContent = `Normal: $${(
-          product.original_price / 1000
-        ).toFixed(3)}`;
+      this.shadowRoot.innerHTML = `
+        <style>
+          /* Estilos del producto */
+          .product-card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            width: 200px;
+            text-align: center;
+          }
+          .product-image {
+            width: 100%;
+            height: auto;
+          }
+          .product-name {
+            font-weight: bold;
+            margin-top: 5px;
+          }
+          .product-price {
+            color: green;
+            font-size: 1.2em;
+          }
+          .product-original-price {
+            text-decoration: line-through;
+            color: red;
+          }
+          .product-discount {
+            background-color: yellow;
+            padding: 2px 5px;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 5px;
+          }
+          .product-rating {
+            margin-top: 5px;
+          }
+        </style>
+        <div class="product-card">
+          <img class="product-image" src="https://via.placeholder.com/200x300" alt="Product Image">
+          <div class="product-name"></div>
+          <div class="product-price"></div>
+          <div class="product-original-price"></div>
+          <div class="product-discount"></div>
+          <div class="product-rating"></div>
+        </div>
+      `;
+    }
 
-        const productDiscount = document.createElement("div");
-        productDiscount.className = "product-discount";
-        productDiscount.textContent = `${product.discount}%`;
+    connectedCallback() {
+      const name = this.getAttribute('name');
+      const price = parseFloat(this.getAttribute('price'));
+      const originalPrice = parseFloat(this.getAttribute('original-price'));
+      const discount = parseInt(this.getAttribute('discount'));
+      const rating = parseFloat(this.getAttribute('rating'));
 
-        const productRating = document.createElement("div");
-        productRating.className = "product-rating";
-        productRating.textContent = `★ ${product.rating}`;
+      this.shadowRoot.querySelector('.product-name').textContent = name;
+      this.shadowRoot.querySelector('.product-price').textContent = `$${(price / 1000).toFixed(3)}`;
+      this.shadowRoot.querySelector('.product-original-price').textContent = `Normal: $${(originalPrice / 1000).toFixed(3)}`;
+      this.shadowRoot.querySelector('.product-discount').textContent = `${discount}%`;
+      this.shadowRoot.querySelector('.product-rating').textContent = `★ ${rating}`;
+    }
+  }
 
-        productCard.appendChild(productImage);
-        productCard.appendChild(productName);
-        productCard.appendChild(productPrice);
-        productCard.appendChild(productOriginalPrice);
-        productCard.appendChild(productDiscount);
-        productCard.appendChild(productRating);
 
-        container.appendChild(productCard);
+  customElements.define('product-card', ProductCard);
+
+  fetch('http://localhost:8000/db.json')
+    .then(response => response.json())
+    .then(data => {
+      const products = data.products;
+
+      products.forEach(product => {
+        const productCard = document.createElement('product-card');
+        productCard.setAttribute('name', product.name);
+        productCard.setAttribute('price', product.price);
+        productCard.setAttribute('original-price', product.original_price);
+        productCard.setAttribute('discount', product.discount);
+        productCard.setAttribute('rating', product.rating);
+
+        productsContainer.appendChild(productCard);
       });
     })
-    .catch((error) => console.error("Error fetching the products:", error));
+    .catch(error => console.error('Error fetching the products:', error));
 });
 
 // import { html, css, LitElement } from "../node_modules/lit";
