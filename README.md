@@ -21,7 +21,7 @@ To install and run this project, follow these steps:
 2. Navigate to the project directory: `cd web-components-group-09`
 3. Install the dependencies: `npm install`
 4. Run json-server `npx json-server db.json`
-4. Open index.html in your browser
+4. Run site `npm start`
 
 ## Contributing
 
