@@ -23,61 +23,12 @@ document.addEventListener("DOMContentLoaded", function () {
   todoListLink.addEventListener('click', showTodoList);
 
   showProducts();
-
-  const productsContainer = document.getElementById('products-container');
-
   class ProductCard extends HTMLElement {
     constructor() {
       super();
-
-      this.attachShadow({ mode: 'open' });
-
-      this.shadowRoot.innerHTML = `
-        <style>
-          /* Estilos del producto */
-          .product-card {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin: 10px;
-            width: 200px;
-            text-align: center;
-          }
-          .product-image {
-            width: 100%;
-            height: auto;
-          }
-          .product-name {
-            font-weight: bold;
-            margin-top: 5px;
-          }
-          .product-price {
-            color: green;
-            font-size: 1.2em;
-          }
-          .product-original-price {
-            text-decoration: line-through;
-            color: red;
-          }
-          .product-discount {
-            background-color: yellow;
-            padding: 2px 5px;
-            border-radius: 5px;
-            font-weight: bold;
-            margin-top: 5px;
-          }
-          .product-rating {
-            margin-top: 5px;
-          }
-        </style>
-        <div class="product-card">
-          <img class="product-image" src="https://via.placeholder.com/200x300" alt="Product Image">
-          <div class="product-name"></div>
-          <div class="product-price"></div>
-          <div class="product-original-price"></div>
-          <div class="product-discount"></div>
-          <div class="product-rating"></div>
-        </div>
-      `;
+      const template = document.getElementById('product-template').content.cloneNode(true);
+      const shadowRoot = this.attachShadow({ mode: 'open' });
+      shadowRoot.appendChild(template);
     }
 
     connectedCallback() {
@@ -95,28 +46,27 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-
   customElements.define('product-card', ProductCard);
+  const productsContainer = document.getElementById('products-container');
 
   fetch('http://localhost:8000/db.json')
     .then(response => response.json())
     .then(data => {
       const products = data.products;
-
-      products.forEach(product => {
+      
+      products.forEach((product) => {
         const productCard = document.createElement('product-card');
         productCard.setAttribute('name', product.name);
         productCard.setAttribute('price', product.price);
         productCard.setAttribute('original-price', product.original_price);
         productCard.setAttribute('discount', product.discount);
         productCard.setAttribute('rating', product.rating);
-
+        productCard.setAttribute('image', product.image);
         productsContainer.appendChild(productCard);
       });
     })
-    .catch(error => console.error('Error fetching the products:', error));
+    .catch(error => console.error('Error fetching product data:', error));
 });
-
 // import { html, css, LitElement } from "../node_modules/lit";
 
 import {LitElement, html, css} from 'https://cdn.skypack.dev/lit';

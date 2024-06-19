@@ -50,6 +50,54 @@
     <div class="row" id="todo-list-section">
         <div class="col-12">
 
+            <template id="product-template">
+                <style>
+                    .product-card {
+                        border: 1px solid #ccc;
+                        padding: 10px;
+                        margin: 10px;
+                        width: 200px;
+                        text-align: center;
+                    }
+                    .product-image {
+                        width: 100%;
+                        height: auto;
+                    }
+                    .product-name {
+                        font-weight: bold;
+                        margin-top: 5px;
+                    }
+                    .product-price {
+                        color: green;
+                        font-size: 1.2em;
+                    }
+                    .product-original-price {
+                        text-decoration: line-through;
+                        color: red;
+                    }
+                    .product-discount {
+                        background-color: yellow;
+                        padding: 2px 5px;
+                        border-radius: 5px;
+                        font-weight: bold;
+                        margin-top: 5px;
+                    }
+                    .product-rating {
+                        margin-top: 5px;
+                    }
+                </style>
+                <div class="product-card">
+                    <img class="product-image" src="https://via.placeholder.com/200x300" alt="Product Image">
+                    <div class="product-name"></div>
+                    <div class="product-price"></div>
+                    <div class="product-original-price"></div>
+                    <div class="product-discount"></div>
+                    <div class="product-rating"></div>
+                </div>
+            </template>
+
+            
+
             <template id="todo-list-template">
                 <div class="todo-list">
                     <h3 class="todo-list-title"></h3>
